@@ -1,0 +1,90 @@
+\documentclass[12 pt, a0paper]{article}
+
+
+% ======================================================================
+% Use UTF-8, T1 and Latin Modern fonts
+% ======================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[defaultsans]{lato}
+\usepackage[rm]{merriweather}
+\usepackage{FiraMono}
+% ======================================================================
+
+
+% ======================================================================
+% Important stuff
+% ======================================================================
+\usepackage{geometry}
+% ======================================================================
+
+
+% ======================================================================
+% Include TikZ and TikZ libraries
+% ======================================================================
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+% ======================================================================
+
+
+% ======================================================================
+% Define colors
+% ======================================================================
+\definecolor{polar night 0}{HTML}{2E3440}
+\definecolor{polar night 1}{HTML}{3B4252}
+\definecolor{polar night 2}{HTML}{434C5E}
+\definecolor{polar night 3}{HTML}{4C566A}
+
+\definecolor{snow storm 0}{HTML}{D8DEE9}
+\definecolor{snow storm 1}{HTML}{E5E9F0}
+\definecolor{snow storm 2}{HTML}{ECEFF4}
+
+\definecolor{frost 0}{HTML}{8FBCBB}
+\definecolor{frost 1}{HTML}{88C0D0}
+\definecolor{frost 2}{HTML}{81A1C1}
+\definecolor{frost 3}{HTML}{5E81AC}
+
+\definecolor{aurora 0}{HTML}{BF616A}
+\definecolor{aurora 1}{HTML}{D08770}
+\definecolor{aurora 2}{HTML}{EBCB8B}
+\definecolor{aurora 3}{HTML}{A3BE8C}
+\definecolor{aurora 4}{HTML}{B48EAD}
+% ======================================================================
+
+
+
+
+\begin{document}
+\pagestyle{empty}
+\begin{tikzpicture}[
+    remember picture,
+    overlay,
+    shift={(current page.north west)},
+    polar night 1,
+    y = -1 cm,
+  ]
+
+  % Reference points
+  % \draw[aurora 0, fill] ( 0.0,   0.0) circle (1);
+  % \draw[aurora 2, fill] (84.1,   0.0) circle (1);
+  % \draw[aurora 3, fill] ( 0.0, 118.9) circle (1);
+  % \draw[aurora 4, fill] (84.1, 118.9) circle (1);
+
+  % Title
+  \node[scale = 4.3] at (42.05, 5.3) {%
+    Are you performing experiments? Then structure your data as late as possible!%
+  };
+
+  % Frame left
+  \draw[polar night 1!90, thick] (4, 5) -- (4, 113.9);
+  \draw[polar night 1!80, thick] (3, 6) -- (3, 112.9);
+  \draw[polar night 1!60, thick] (2, 7) -- (2, 111.9);
+
+  % Frame right
+  \draw[polar night 1!90, thick] (80.1, 5) -- (80.1, 113.9);
+  \draw[polar night 1!80, thick] (81.1, 6) -- (81.1, 112.9);
+  \draw[polar night 1!60, thick] (82.1, 7) -- (82.1, 111.9);
+\end{tikzpicture}
+\end{document}

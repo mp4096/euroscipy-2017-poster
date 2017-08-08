@@ -1,0 +1,2 @@
+cmd: cd poster && pdflatex --interaction batchmode _poster.tex
+name: Compile
