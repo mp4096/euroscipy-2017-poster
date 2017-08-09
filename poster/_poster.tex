@@ -1,11 +1,12 @@
-\documentclass[12 pt, a0paper]{article}
+\documentclass[12 pt, a0paper, british]{article}
 
 
 % ======================================================================
-% Use UTF-8, T1 and Latin Modern fonts
+% Use UTF-8 and T1 font encoding
 % ======================================================================
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{babel}
 
 \usepackage[defaultsans]{lato}
 \usepackage[rm]{merriweather}
@@ -24,6 +25,7 @@
 % Include TikZ and TikZ libraries
 % ======================================================================
 \usepackage{pgfplots}
+\pgfplotsset{compat=newest}
 \usepackage{tikz}
 \usetikzlibrary{calc}
 % ======================================================================
@@ -71,6 +73,8 @@
   % \draw[aurora 2, fill] (84.1,   0.0) circle (1);
   % \draw[aurora 3, fill] ( 0.0, 118.9) circle (1);
   % \draw[aurora 4, fill] (84.1, 118.9) circle (1);
+
+  \draw[snow storm 2!50, fill] (current page.north west) rectangle (current page.south east);
 
   % Title
   \node[scale = 4.3] at (42.05, 5.3) {%
