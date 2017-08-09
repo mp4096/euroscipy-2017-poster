@@ -1,0 +1,149 @@
+\Large
+
+\pgfmathsetmacro{\LongTableCellHeight}{1}
+
+% Colourful cells
+\foreach \y/\c/\s in {%
+  0/frost 0/B,%
+  1/frost 3/C,%
+  2/frost 1/A,%
+  3/frost 0/B,%
+  4/frost 3/C,%
+  5/frost 3/C,%
+  6/frost 1/A,%
+  7/frost 1/A,%
+  8/frost 3/C,%
+  9/frost 0/B,%
+  10/frost 3/C,%
+  11/frost 1/A,%
+  12/frost 0/B,%
+  13/frost 1/A,%
+  14/frost 1/A%
+  } {
+  \draw[\c, fill]
+    (4.5, {\LongTableCellHeight*\y}) rectangle +(3, \LongTableCellHeight)
+    node[midway, polar night 1] {\s};
+}
+\foreach \y/\c/\s in {%
+  0/aurora 0/III,%
+  1/aurora 1/II,%
+  2/aurora 1/II,%
+  3/aurora 2/I,%
+  4/aurora 0/III,%
+  5/aurora 2/I,%
+  6/aurora 0/III,%
+  7/aurora 1/II,%
+  8/aurora 0/III,%
+  9/aurora 2/I,%
+  10/aurora 2/I,%
+  11/aurora 0/III,%
+  12/aurora 0/III,%
+  13/aurora 2/I,%
+  14/aurora 2/I%
+  } {
+  \draw[\c, fill]
+    (1.5, {\LongTableCellHeight*\y}) rectangle +(3, \LongTableCellHeight)
+    node[midway, polar night 1] {\s};
+}
+
+% Horizontal lines
+\foreach \y in {0, 1, ..., 15} {
+  \draw[thick] (0, {\LongTableCellHeight*\y}) -- +(9.5, 0);
+}
+% Dots
+\foreach \y in {1, 2, ..., 15} {
+  \node at (0.5, {\LongTableCellHeight*(\y - 0.5)}) {\y};
+  \node at (8.5, {\LongTableCellHeight*(\y - 0.5)}) {\ldots};
+}
+
+
+
+% 2D summary
+\pgfmathsetmacro{\TwoDimCellSize}{2.5}
+\pgfmathsetmacro{\TwoDimHeaderSize}{1}
+
+\begin{scope}[xshift = 20 cm, yshift = -2 cm]
+  \foreach \x/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
+    \draw[\c, fill]
+      ({\TwoDimCellSize*\x}, {-\TwoDimHeaderSize}) rectangle +(\TwoDimCellSize, \TwoDimHeaderSize)
+      node[midway, polar night 1] {\s};
+  }
+  \foreach \y/\c/\s in {0/aurora 2/I, 1/aurora 1/II, 2/aurora 0/III} {
+    \draw[\c, fill]
+      ({-\TwoDimHeaderSize}, {\TwoDimCellSize*\y}) rectangle +(\TwoDimHeaderSize, \TwoDimCellSize)
+      node[midway, polar night 1] {\s};
+  }
+  \foreach \i in {0, 1, ..., 3} {
+    \draw[thick]
+      ({-\TwoDimHeaderSize}, {\TwoDimCellSize*\i})
+      --
+      +({\TwoDimCellSize*3 + \TwoDimHeaderSize}, 0);
+    \draw[thick]
+      ({\TwoDimCellSize*\i}, {-\TwoDimHeaderSize})
+      --
+      +(0, {\TwoDimCellSize*3 + \TwoDimHeaderSize});
+  }
+
+  \begin{scope}[xshift = {\TwoDimCellSize*0.5 cm}, yshift = {-\TwoDimCellSize*0.5 cm}]
+    % I
+    \node at (0, 0) {14, 15}; % A
+    \node at (\TwoDimCellSize, 0) {4, 10}; % B
+    \node at ({2*\TwoDimCellSize}, 0) {6, 11}; % C
+
+    % II
+    \node at (0, \TwoDimCellSize) {3, 8}; % A
+    \node at (\TwoDimCellSize, \TwoDimCellSize) {}; % B
+    \node at ({2*\TwoDimCellSize}, \TwoDimCellSize) {2}; % C
+
+    % III
+    \node at (0, {2*\TwoDimCellSize}) {7, 12}; % A
+    \node at (\TwoDimCellSize, {2*\TwoDimCellSize}) {1, 13}; % B
+    \node at ({2*\TwoDimCellSize}, {2*\TwoDimCellSize}) {5, 9}; % C
+  \end{scope}
+\end{scope}
+
+
+
+% 1D summary, I-II-II only
+\pgfmathsetmacro{\OneDimLineHeight}{2.5}
+\pgfmathsetmacro{\OneDimLineWidth}{6.5}
+\pgfmathsetmacro{\OneDimHeaderWidth}{1}
+
+\begin{scope}[xshift = 10 cm, yshift = -20 cm]
+  \foreach \y/\c/\s in {0/aurora 2/I, 1/aurora 1/II, 2/aurora 0/III} {
+    \draw[\c, fill]
+      ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\y}) rectangle +(\OneDimHeaderWidth, \OneDimLineHeight)
+      node[midway, polar night 1] {\s};
+  }
+  \foreach \i in {0, 1, ..., 3} {
+    \draw[thick] ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\i}) -- +({\OneDimLineWidth + \OneDimHeaderWidth}, 0);
+  }
+  \draw[thick] (0, 0) -- +(0, {3*\OneDimLineHeight});
+
+  \begin{scope}[xshift = 0.5 cm, yshift = {-\OneDimLineHeight*0.5 cm}, right]
+    \node at (0, 0) {4, 6, 10, 11, 14, 15}; % I
+    \node at (0, \OneDimLineHeight) {2, 3, 8}; % II
+    \node at (0, {2*\OneDimLineHeight}) {1, 5, 9, 7, 12, 13}; % III
+  \end{scope}
+\end{scope}
+
+
+
+% 1D summary, A-B-C only
+\begin{scope}[xshift = 20 cm, yshift = -20 cm]
+  \foreach \y/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
+    \draw[\c, fill]
+      ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\y}) rectangle +(\OneDimHeaderWidth, \OneDimLineHeight)
+      node[midway, polar night 1] {\s};
+  }
+  \foreach \i in {0, 1, ..., 3} {
+    \draw[thick] ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\i}) -- +({\OneDimLineWidth + \OneDimHeaderWidth}, 0);
+  }
+  \draw[thick] (0, 0) -- +(0, {3*\OneDimLineHeight});
+
+  \begin{scope}[xshift = 0.5 cm, yshift = {-\OneDimLineHeight*0.5 cm}, right]
+    \node at (0, 0) {3, 7, 8, 12, 14, 15}; % A
+    \node at (0, \OneDimLineHeight) {1, 4, 10, 13}; % B
+    \node at (0, {2*\OneDimLineHeight}) {2, 5, 6, 9, 11}; % C
+  \end{scope}
+\end{scope}
