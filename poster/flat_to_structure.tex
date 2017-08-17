@@ -59,14 +59,24 @@
 
 
 % 2D summary
-\pgfmathsetmacro{\TwoDimCellSize}{2.5}
+\pgfmathsetmacro{\TwoDimCellSize}{3}
 \pgfmathsetmacro{\TwoDimHeaderSize}{1}
 
 \begin{scope}[xshift = 20 cm, yshift = -2 cm]
-  \foreach \x/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
-    \draw[\c, fill]
-      ({\TwoDimCellSize*\x}, {-\TwoDimHeaderSize}) rectangle +(\TwoDimCellSize, \TwoDimHeaderSize)
-      node[midway, polar night 1] {\s};
+  \foreach \y in {0, 1, 2} {
+    % A-B-C header
+    \foreach \x/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
+      \draw[\c, fill]
+        ({\TwoDimCellSize*\x}, {\TwoDimCellSize*\y})
+        rectangle
+        +(\TwoDimCellSize, \TwoDimHeaderSize)
+        node[midway, polar night 1] {\s};
+    }
+    % Horizontal line below A-B-C
+    \draw[thick]
+      (0, {\TwoDimCellSize*\y + \TwoDimHeaderSize})
+      --
+      +({3*\TwoDimCellSize}, 0);
   }
   \foreach \y/\c/\s in {0/aurora 2/I, 1/aurora 1/II, 2/aurora 0/III} {
     \draw[\c, fill]
@@ -78,13 +88,13 @@
       ({-\TwoDimHeaderSize}, {\TwoDimCellSize*\i})
       --
       +({\TwoDimCellSize*3 + \TwoDimHeaderSize}, 0);
-    \draw[thick]
-      ({\TwoDimCellSize*\i}, {-\TwoDimHeaderSize})
-      --
-      +(0, {\TwoDimCellSize*3 + \TwoDimHeaderSize});
+    \draw[thick] ({\TwoDimCellSize*\i}, 0) -- +(0, {\TwoDimCellSize*3});
   }
 
-  \begin{scope}[xshift = {\TwoDimCellSize*0.5 cm}, yshift = {-\TwoDimCellSize*0.5 cm}]
+  \begin{scope}[
+      xshift = {\TwoDimCellSize*0.5 cm},
+      yshift = {-(\TwoDimCellSize + \TwoDimHeaderSize)*0.5 cm},
+    ]
     % I
     \node at (0, 0) {14, 15}; % A
     \node at (\TwoDimCellSize, 0) {4, 10}; % B
@@ -92,7 +102,7 @@
 
     % II
     \node at (0, \TwoDimCellSize) {3, 8}; % A
-    \node at (\TwoDimCellSize, \TwoDimCellSize) {}; % B
+    \node at (\TwoDimCellSize, \TwoDimCellSize) {\LARGE $\boldsymbol{\varnothing}$}; % B
     \node at ({2*\TwoDimCellSize}, \TwoDimCellSize) {2}; % C
 
     % III
