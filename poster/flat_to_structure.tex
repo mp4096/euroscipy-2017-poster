@@ -72,11 +72,6 @@
         +(\TwoDimCellSize, \TwoDimHeaderSize)
         node[midway, polar night 1] {\s};
     }
-    % Horizontal line below A-B-C
-    \draw[thick]
-      (0, {\TwoDimCellSize*\y + \TwoDimHeaderSize})
-      --
-      +({3*\TwoDimCellSize}, 0);
   }
   \foreach \y/\c/\s in {0/aurora 2/I, 1/aurora 1/II, 2/aurora 0/III} {
     \draw[\c, fill]
