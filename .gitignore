@@ -12,6 +12,7 @@ _*.pdf
 *.fot
 *.cb
 *.cb2
+*_indentex.tex
 
 ## Intermediate documents:
 *.dvi

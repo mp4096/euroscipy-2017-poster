@@ -1,2 +1,2 @@
-cmd: cd poster && pdflatex --interaction batchmode _poster.tex
+cmd: cd poster && indentex -v . && pdflatex --interaction batchmode _poster.tex
 name: Compile
