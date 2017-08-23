@@ -1,1 +1,21 @@
-second column
+The solution is to use the so called long table format.
+In this concept, each result is stored as a `line'
+in a table which columns are the factors.
+Now, we can use Pandas commands to create the so called \emph{pivot tables},
+which basically restructure data on-demand.
+
+Furthermore, by using Pandas, we can avoid boilerplate and verbose code.
+Just use the statistics command in order to compute statistics over all required
+and filtered entries.
+
+
+\begin{lstlisting}
+stats = df.groupby(["len_p", "fun"])\
+          .describe()["runtime"]\
+          .drop("count", axis=1)\
+          .unstack()\
+          .swaplevel(axis=1)
+\end{lstlisting}
+
+What we have seen here is the difference between the so-called \emph{long}
+and \emph{short} formats.

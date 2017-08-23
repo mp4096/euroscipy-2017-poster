@@ -1,1 +1,31 @@
-first column
+Doing experiments
+
+Experiments, e.g.\ benchmarking algorithms or investigating how some factors influence some outcomes.
+
+Terms: Factors, outcomes
+
+Most obvious thing is to make use of Python dicts and build up a
+hierarchy
+
+\begin{lstlisting}
+def experiment(factor_a, factor_b):
+    # ... do awesome stuff
+    return result
+
+# Initialise `data` somehow
+for f_a, f_b in factors_collection:
+    data[f_a][f_b] = experiment(f_a, f_b)
+\end{lstlisting}
+
+However, this leads to some problems
+
+The most obvious one is that this dict of dicts (of dicts etc) is not
+flexible: one cannot easily reorder data.
+For instance, if we want to index first over the second factor and then over the first,
+this would require a tedious double for loop.
+
+Furthermore, operating on these data structures requires a lot of boilerplate:
+suppose we want to compute statistics over all results for factor 1 == A.
+This will require a lot of boilerplate.
+
+To sum this up, this solution is cumbersome and verbose. Can we do better?
