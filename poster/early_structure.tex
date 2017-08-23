@@ -16,13 +16,22 @@
   \draw[aurora 3, fill] (1, 1) circle (0.3);
   \draw[aurora 3, fill] (1.5, 1.6) circle (0.4);
   \draw[aurora 3, fill] (1.2, 2.4) circle (0.35);
+
+  \node at (0.25, -5.5) {\Large{}Experiment};
 \end{scope}
+
+
+\draw[ultra thick, -{Latex[scale=1.2]}] (4, -6) -- (10, -6) node[midway, sloped, above] %
+  {\Large{}Early structuring};
 
 
 \pgfmathsetmacro{\TwoDimCellSize}{2.5}
 \pgfmathsetmacro{\TwoDimHeaderSize}{1}
 
-\begin{scope}[xshift = 0 cm, yshift = 0 cm]
+\begin{scope}[xshift = 12 cm, yshift = 10 cm]
+  \node at ({\TwoDimCellSize*1.5 - \TwoDimHeaderSize*0.5}, -0.8) %
+    {\Large{}Structured data, e.g.\ nested dicts};
+
   \foreach \y in {0, 1, 2} {
     % A-B-C header
     \foreach \x/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
@@ -67,7 +76,24 @@
   \end{scope}
 \end{scope}
 
-\begin{scope}[xshift = 20 cm, yshift = 0 cm]
+
+\path[
+  ultra thick,
+  -{Latex[scale=1.2]},
+  decoration={
+    zigzag,
+    segment length = 32,
+    amplitude = 9,
+    post = lineto,
+    post length = 2pt,
+    },
+  ] %
+  (12, -1.5) edge[decorate] +(-3, 6);
+\node[align = left] at (5.5, 2) %
+  {\Large{}However, now it is difficult\\\Large{}to reorder the data\ldots};
+
+
+\begin{scope}[xshift = 5 cm, yshift = -5 cm]
   \foreach \y in {0, 1, 2} {
     % A-B-C header
     \foreach \x/\c/\s in {0/aurora 2/I, 1/aurora 1/II, 2/aurora 0/III} {
@@ -113,12 +139,27 @@
 \end{scope}
 
 
+\path[
+  ultra thick,
+  -{Latex[scale=1.2]},
+  decoration={
+    zigzag,
+    segment length = 32,
+    amplitude = 9,
+    post = lineto,
+    post length = 2pt,
+    },
+  ] %
+  (18.5, -1.5) edge[decorate] +(3, 6);
+\node at (24, 2) {\Large{}\ldots{}or to `flatten' it};
+
+
 % 1D summary, A-B-C only
 \pgfmathsetmacro{\OneDimLineHeight}{2.5}
-\pgfmathsetmacro{\OneDimLineWidth}{6.5}
+\pgfmathsetmacro{\OneDimLineWidth}{5.5}
 \pgfmathsetmacro{\OneDimHeaderWidth}{1}
 
-\begin{scope}[xshift = 10 cm, yshift = -10 cm]
+\begin{scope}[xshift = 20 cm, yshift = -5 cm]
   \foreach \y/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
     \draw[\c, fill]
       ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\y}) rectangle +(\OneDimHeaderWidth, \OneDimLineHeight)
