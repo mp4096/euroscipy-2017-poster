@@ -101,6 +101,7 @@
     polar night 1,
     y = -1 cm,
   ]
+  \draw[snow storm 2!50, fill] (current page.north west) rectangle (current page.south east);
 
   % Reference points
   % \draw[aurora 0, fill] ( 0.0,   0.0) circle (1);
@@ -108,7 +109,14 @@
   % \draw[aurora 3, fill] ( 0.0, 118.9) circle (1);
   % \draw[aurora 4, fill] (84.1, 118.9) circle (1);
 
-  \draw[snow storm 2!50, fill] (current page.north west) rectangle (current page.south east);
+
+
+  % Design grid -- comment out when finished
+  \draw[black!40] (46.25, 0) -- +(0, 118.9) node[midway, left, black!80] {\Huge{}46.25};
+  \draw[black!40] (0, 39) -- +(84.1, 0) node[midway, above, black!80] {\Huge{}39};
+  \draw[black!40] (0, 74) -- +(84.1, 0) node[midway, above, black!80] {\Huge{}74};
+
+
 
   % Title
   \node[scale = 4.3] at (42.05, 5.3) {%
