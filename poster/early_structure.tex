@@ -1,3 +1,5 @@
+\Large
+
 % Flasks
 \begin{scope}[xshift = 0 cm, yshift = 7 cm, y = 1 cm]
   \draw[rounded corners = 0.3 cm, fill = aurora 3]
@@ -17,12 +19,12 @@
   \draw[aurora 3, fill] (1.5, 1.6) circle (0.4);
   \draw[aurora 3, fill] (1.2, 2.4) circle (0.35);
 
-  \node at (0.25, -5.5) {\Large{}Experiment};
+  \node at (0.25, -5.5) {Experiment};
 \end{scope}
 
 
-\draw[ultra thick, -{Latex[scale=1.2]}] (4, -6) -- (10, -6) node[midway, sloped, above] %
-  {\Large{}Early structuring};
+\draw[ultra thick, -{Latex[scale=1.2]}] (3.5, -6) -- (10.5, -6) node[midway, sloped, above] %
+  {Early structuring};
 
 
 \pgfmathsetmacro{\TwoDimCellSize}{2.5}
@@ -30,7 +32,7 @@
 
 \begin{scope}[xshift = 12 cm, yshift = 10 cm]
   \node at ({\TwoDimCellSize*1.5 - \TwoDimHeaderSize*0.5}, -0.8) %
-    {\Large{}Structured data, e.g.\ nested dicts};
+    {Structured data, e.g.\ nested dicts};
 
   \foreach \y in {0, 1, 2} {
     % A-B-C header
@@ -90,7 +92,7 @@
   ] %
   (12, -1.5) edge[decorate] +(-3, 6);
 \node[align = left] at (5.5, 2) %
-  {\Large{}However, now it is difficult\\\Large{}to reorder the data\ldots};
+  {However, now it is difficult\\to reorder the data\ldots};
 
 
 \begin{scope}[xshift = 5 cm, yshift = -5 cm]
@@ -151,12 +153,12 @@
     },
   ] %
   (18.5, -1.5) edge[decorate] +(3, 6);
-\node at (24, 2) {\Large{}\ldots{}or to `flatten' it};
+\node at (24, 2) {\ldots{}or to `flatten' it};
 
 
 % 1D summary, A-B-C only
 \pgfmathsetmacro{\OneDimLineHeight}{2.5}
-\pgfmathsetmacro{\OneDimLineWidth}{5.5}
+\pgfmathsetmacro{\OneDimLineWidth}{6.5}
 \pgfmathsetmacro{\OneDimHeaderWidth}{1}
 
 \begin{scope}[xshift = 20 cm, yshift = -5 cm]
