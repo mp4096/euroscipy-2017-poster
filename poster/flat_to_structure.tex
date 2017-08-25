@@ -18,72 +18,87 @@
   \draw[aurora 3, fill] (1, 1) circle (0.3);
   \draw[aurora 3, fill] (1.5, 1.6) circle (0.4);
   \draw[aurora 3, fill] (1.2, 2.4) circle (0.35);
+
+  \node at (0.25, -5.5) {Experiment};
 \end{scope}
 
 
-\pgfmathsetmacro{\LongTableCellHeight}{1}
+\draw[ultra thick, -{Latex[scale=1.2]}] (3.5, -6) -- (10.5, -6) node[midway, sloped, above] %
+  {No structuring};
 
-% Colourful cells
-\foreach \y/\c/\s in {%
-  0/frost 0/B,%
-  1/frost 3/C,%
-  2/frost 1/A,%
-  3/frost 0/B,%
-  4/frost 3/C,%
-  5/frost 3/C,%
-  6/frost 1/A,%
-  7/frost 1/A,%
-  8/frost 3/C,%
-  9/frost 0/B,%
-  10/frost 3/C,%
-  11/frost 1/A,%
-  12/frost 0/B,%
-  13/frost 1/A,%
-  14/frost 1/A%
-  } {
-  \draw[\c, fill]
-    (4.5, {\LongTableCellHeight*\y}) rectangle +(3, \LongTableCellHeight)
-    node[midway, polar night 1] {\s};
-}
-\foreach \y/\c/\s in {%
-  0/aurora 0/III,%
-  1/aurora 1/II,%
-  2/aurora 1/II,%
-  3/aurora 2/I,%
-  4/aurora 0/III,%
-  5/aurora 2/I,%
-  6/aurora 0/III,%
-  7/aurora 1/II,%
-  8/aurora 0/III,%
-  9/aurora 2/I,%
-  10/aurora 2/I,%
-  11/aurora 0/III,%
-  12/aurora 0/III,%
-  13/aurora 2/I,%
-  14/aurora 2/I%
-  } {
-  \draw[\c, fill]
-    (1.5, {\LongTableCellHeight*\y}) rectangle +(3, \LongTableCellHeight)
-    node[midway, polar night 1] {\s};
-}
 
-% Horizontal lines
-\foreach \y in {0, 1, ..., 15} {
-  \draw[thick] (0, {\LongTableCellHeight*\y}) -- +(9.5, 0);
-}
-% Dots
-\foreach \y in {1, 2, ..., 15} {
-  \node at (0.5, {\LongTableCellHeight*(\y - 0.5)}) {\y};
-  \node at (8.5, {\LongTableCellHeight*(\y - 0.5)}) {\ldots};
-}
+\begin{scope}[xshift = 12 cm, yshift = 12 cm]
+  \pgfmathsetmacro{\LongTableCellHeight}{1}
 
+  % Colourful cells
+  \foreach \y/\c/\s in {%
+    0/frost 0/B,%
+    1/frost 3/C,%
+    2/frost 1/A,%
+    3/frost 0/B,%
+    4/frost 3/C,%
+    5/frost 3/C,%
+    6/frost 1/A,%
+    7/frost 1/A,%
+    8/frost 3/C,%
+    9/frost 0/B,%
+    10/frost 3/C,%
+    11/frost 1/A,%
+    12/frost 0/B,%
+    13/frost 1/A,%
+    14/frost 1/A%
+    } {
+    \draw[\c, fill]
+      (4.5, {\LongTableCellHeight*\y}) rectangle +(3, \LongTableCellHeight)
+      node[midway, polar night 1] {\s};
+  }
+  \foreach \y/\c/\s in {%
+    0/aurora 0/III,%
+    1/aurora 1/II,%
+    2/aurora 1/II,%
+    3/aurora 2/I,%
+    4/aurora 0/III,%
+    5/aurora 2/I,%
+    6/aurora 0/III,%
+    7/aurora 1/II,%
+    8/aurora 0/III,%
+    9/aurora 2/I,%
+    10/aurora 2/I,%
+    11/aurora 0/III,%
+    12/aurora 0/III,%
+    13/aurora 2/I,%
+    14/aurora 2/I%
+    } {
+    \draw[\c, fill]
+      (1.5, {\LongTableCellHeight*\y}) rectangle +(3, \LongTableCellHeight)
+      node[midway, polar night 1] {\s};
+  }
+
+  % Horizontal lines
+  \foreach \y in {0, 1, ..., 15} {
+    \draw[thick] (0, {\LongTableCellHeight*\y}) -- +(9.5, 0);
+  }
+  % Dots
+  \foreach \y in {1, 2, ..., 15} {
+    \node at (0.5, {\LongTableCellHeight*(\y - 0.5)}) {\y};
+    \node at (8.5, {\LongTableCellHeight*(\y - 0.5)}) {\ldots};
+  }
+\end{scope}
+
+
+\draw[ultra thick, -{Latex[scale=1.2]}] (13.5, 4) -- +(-10, 6) node[midway, sloped, above] %
+  {bla};
+\draw[ultra thick, -{Latex[scale=1.2]}] (17.0, 4) -- +(-2, 7.2) node[midway, sloped, above] %
+  {No structuring};
+\draw[ultra thick, -{Latex[scale=1.2]}] (20.5, 4) -- +(8, 7.2) node[midway, sloped, above] %
+  {No structuring};
 
 
 % 2D summary
 \pgfmathsetmacro{\TwoDimCellSize}{3}
 \pgfmathsetmacro{\TwoDimHeaderSize}{1}
 
-\begin{scope}[xshift = 20 cm, yshift = -2 cm]
+\begin{scope}[xshift = -2 cm, yshift = -11 cm]
   \foreach \y in {0, 1, 2} {
     % A-B-C header
     \foreach \x/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
@@ -129,13 +144,12 @@
 \end{scope}
 
 
-
 % 1D summary, I-II-II only
 \pgfmathsetmacro{\OneDimLineHeight}{2.5}
 \pgfmathsetmacro{\OneDimLineWidth}{6.5}
 \pgfmathsetmacro{\OneDimHeaderWidth}{1}
 
-\begin{scope}[xshift = 10 cm, yshift = -20 cm]
+\begin{scope}[xshift = 13 cm, yshift = -12 cm]
   \foreach \y/\c/\s in {0/aurora 2/I, 1/aurora 1/II, 2/aurora 0/III} {
     \draw[\c, fill]
       ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\y}) rectangle +(\OneDimHeaderWidth, \OneDimLineHeight)
@@ -154,9 +168,8 @@
 \end{scope}
 
 
-
 % 1D summary, A-B-C only
-\begin{scope}[xshift = 20 cm, yshift = -20 cm]
+\begin{scope}[xshift = 26 cm, yshift = -12 cm]
   \foreach \y/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
     \draw[\c, fill]
       ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\y}) rectangle +(\OneDimHeaderWidth, \OneDimLineHeight)
