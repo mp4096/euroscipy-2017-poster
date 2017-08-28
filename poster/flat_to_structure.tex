@@ -74,6 +74,8 @@
       node[midway, polar night 1] {\s};
   }
 
+  \node at (4.75, -0.8) {Unstructured data (`long format')};
+
   % Horizontal lines
   \foreach \y in {0, 1, ..., 15} {
     \draw[thick] (0, {\LongTableCellHeight*\y}) -- +(9.5, 0);
@@ -86,12 +88,11 @@
 \end{scope}
 
 
-\draw[ultra thick, -{Latex[scale=1.2]}] (13.5, 4) -- +(-10, 6) node[midway, sloped, above] %
-  {bla};
-\draw[ultra thick, -{Latex[scale=1.2]}] (17.0, 4) -- +(-2, 7.2) node[midway, sloped, above] %
-  {No structuring};
-\draw[ultra thick, -{Latex[scale=1.2]}] (20.5, 4) -- +(8, 7.2) node[midway, sloped, above] %
-  {No structuring};
+\draw[ultra thick, -{Latex[scale=1.2]}] (13.5, 4) -- +(-10, 6);
+\draw[ultra thick, -{Latex[scale=1.2]}] (17.0, 4) -- +(-2, 7.2);
+\draw[ultra thick, -{Latex[scale=1.2]}] (20.5, 4) -- +(8, 7.2);
+\node[left, align = left] at (9.5, 6) {Late structuring can be\\done on demand\ldots};
+\node[align = left] at (20, 7) {\ldots\ into any form\\\hphantom{\ldots\ }you want to!};
 
 
 % 2D summary
@@ -99,6 +100,9 @@
 \pgfmathsetmacro{\TwoDimHeaderSize}{1}
 
 \begin{scope}[xshift = -2 cm, yshift = -11 cm]
+  \node at ({\TwoDimCellSize*1.5 - \TwoDimHeaderSize*0.5}, {\TwoDimCellSize*3 + 0.8}) %
+    {Data grouped by both factors};
+
   \foreach \y in {0, 1, 2} {
     % A-B-C header
     \foreach \x/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
@@ -150,6 +154,9 @@
 \pgfmathsetmacro{\OneDimHeaderWidth}{1}
 
 \begin{scope}[xshift = 13 cm, yshift = -12 cm]
+  \node at ({\OneDimLineWidth*0.5 - \OneDimHeaderWidth*0.5}, {\OneDimLineHeight*3 + 0.8}) %
+    {Data grouped by feature 1};
+
   \foreach \y/\c/\s in {0/aurora 2/I, 1/aurora 1/II, 2/aurora 0/III} {
     \draw[\c, fill]
       ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\y}) rectangle +(\OneDimHeaderWidth, \OneDimLineHeight)
@@ -170,6 +177,9 @@
 
 % 1D summary, A-B-C only
 \begin{scope}[xshift = 26 cm, yshift = -12 cm]
+  \node at ({\OneDimLineWidth*0.5 - \OneDimHeaderWidth*0.5}, {\OneDimLineHeight*3 + 0.8}) %
+    {Data grouped by feature 2};
+
   \foreach \y/\c/\s in {0/frost 1/A, 1/frost 0/B, 2/frost 3/C} {
     \draw[\c, fill]
       ({-\OneDimHeaderWidth}, {\OneDimLineHeight*\y}) rectangle +(\OneDimHeaderWidth, \OneDimLineHeight)
