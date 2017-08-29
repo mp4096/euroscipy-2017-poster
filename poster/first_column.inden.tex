@@ -1,31 +1,86 @@
-Doing experiments
+\textrm{\textbf{What is an experiment?}}
+\vspace{6 pt}
 
-Experiments, e.g.\ benchmarking algorithms or investigating how some factors influence some outcomes.
+In science, we do a lot of \emph{experiments},
+e.g.\ quantifying chemical or physical phe\-nomena,
+benchmarking algorithms or performing social surveys.
+Often we would manipulate some \emph{factors}
+in order to see how they influence the experiment \emph{outcome}.
 
-Terms: Factors, outcomes
+\vspace{3 pt}
 
-Most obvious thing is to make use of Python dicts and build up a
-hierarchy
+For instance, imagine we perform an experiment with two factors,
+\lstinline{factor_1} and \lstinline{factor_2}.
+They can take values \lstinline{"I"}, \lstinline{"II"}, \lstinline{"III"}
+or \lstinline{"A"}, \lstinline{"B"}, \lstinline{"C"} respectively.
+We can abstract this experiment as a Python function:
 
 \begin{lstlisting}
-def experiment(factor_a, factor_b):
-    # ... do awesome stuff
-    return result
-
-# Initialise `data` somehow
-for f_a, f_b in factors_collection:
-    data[f_a][f_b] = experiment(f_a, f_b)
+def perform_experiment(factor_1, factor_2):
+    # ...
+    return outcome
 \end{lstlisting}
 
-However, this leads to some problems
+\vspace{-8 pt}
 
-The most obvious one is that this dict of dicts (of dicts etc) is not
-flexible: one cannot easily reorder data.
-For instance, if we want to index first over the second factor and then over the first,
-this would require a tedious double for loop.
+\textrm{\textbf{Early structuring}}
+\vspace{6 pt}
 
-Furthermore, operating on these data structures requires a lot of boilerplate:
-suppose we want to compute statistics over all results for factor 1 == A.
-This will require a lot of boilerplate.
+Now it's fun time! We actually perform this experiment
+for factor combinations specified in \lstinline{factors_to_investigate}.
+But how do we store the results?
+A naïve approach would be to make use of Python dicts
+and build up a nested dict structure.
+Often we want to test a particular factor combination multiple times,
+e.g.\ when we want to investigate how consistent the outcomes are.
+Hence, we initialise our dict of dicts with an empty list
+and append the experiment results if any.
 
-To sum this up, this solution is cumbersome and verbose. Can we do better?
+\begin{lstlisting}
+data = {
+  f_1: {f_2: [] for f_2 in ["A", "B", "C"]}
+  for f_1 in ["I", "II", "III"]
+}
+for f_1, f_2 in factors_to_investigate:
+    data[f_1][f_2].append(experiment(f_1, f_2))
+\end{lstlisting}
+
+\vspace{-22 pt}
+
+Although ostensibly simple, this approach leads to significant problems.
+The most obvious one is that the nested dicts are not flexible.
+Reordering or reshaping operations,
+such as making \lstinline{factor_2} the first index or flattening data (see the right figure),
+would have to be written \emph{ad hoc} and they would be very verbose.
+This inflexibility of the data format can pose an insurmountable overhead during
+rapid, iterative development of scientific code.
+
+\vspace{3 pt}
+
+Coincidentally, early structuring makes processing older data significantly more difficult.
+Imagine you want to manipulate an additional factor \lstinline{factor_3}.
+You rewrite your postprocessing and visualisation code to accomodate for the additional nesting level,
+but now you have to either modify all previously stored results to use them with the new code
+or maintain multiple codebases, one for the old structure and one for the new one.
+
+\vspace{3 pt}
+
+Finally, any mathematical operations on such data structures require
+a lot of \emph{ad hoc}, verbose code (once again).
+Suppose we want to compute statistics (mean, standard deviation etc.)
+over all results for \lstinline{factor_2 == "A"}:
+
+\begin{lstlisting}
+import numpy as np
+flattened = []
+for _, subdict in data.items():
+    for k, v in subdict.items():
+        if k == "A":
+            flattened.extend(v)
+flattened = np.array(flattened)
+print(flattened.mean(), flattened.std())
+\end{lstlisting}
+
+\vspace{-22 pt}
+
+Just imagine how much you will have to refactor here! Yuck!
