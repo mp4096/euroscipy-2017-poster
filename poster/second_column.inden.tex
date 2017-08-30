@@ -1,25 +1,92 @@
-The solution is to use the so called long table format.
-In this concept, each result is stored as a `line'
-in a table which columns are the factors.
-Now, we can use Pandas commands to create the so called \emph{pivot tables},
-which basically restructure data on-demand.
+\textrm{\textbf{Late structuring}}
+\vspace{6 pt}
 
-Furthermore, by using Pandas, we can avoid boilerplate and verbose code.
-Just use the statistics command in order to compute statistics over all required
-and filtered entries.
+The answer is yes, we \emph{can} do better.
+The solution is to adopt the following two principles:
+First, we should be lazy and structure our data as late as possible;
+second, we should use already existing, powerful libraries such as Pandas.
 
+\vspace{3 pt}
+
+But how does the data look like before structuring?
+Actually, quite simple:
+It is a Pandas \lstinline{DataFrame}, which rows contain
+factor combinations and the corresponding experiment results (see left figure).
+This is the so called Pandas \emph{long format}.
+So we can now rewrite our experiment code like this:
 
 \begin{lstlisting}
-stats = df.groupby(["len_p", "fun"])\
-          .describe()["runtime"]\
-          .drop("count", axis=1)\
-          .unstack()\
-          .swaplevel(axis=1)
+import pandas as pd
+df = pd.DataFrame(
+    index=range(len(factors_to_investigate)),
+    columns=("factor_1", "factor_2", "outcome"),
+)
+for i, (f_1, f_2) in enumerate(factors_to_investigate):
+    df.loc[i] = (f_1, f_2, experiment(f_1, f_2))
 \end{lstlisting}
 
-What we have seen here is the difference between the so-called \emph{long}
-and \emph{short} formats.
+\vspace{-22 pt}
 
-There are a lot of possibilities to reshape data in Pandas.
-One of the most expressive ones is \texttt{groupby}.
-Combined with \texttt{describe}, it can be very powerful.
+And that's it! We don't need to care about the exact low-level,
+internal data layout, Pandas does it all for us.
+To convert our data into some structured
+representation---also called \emph{wide format}---we
+can use Pandas functions such as \lstinline{pivot()}, \lstinline{pivot_table()},
+\lstinline{stack()}, \lstinline{unstack()}, \lstinline{groupby()}.
+
+\vspace{3 pt}
+
+Sure, this multitude of different reshaping functions
+can be quite intimidating at the beginning.
+You probably want to stick with \lstinline{groupby()} and \lstinline{describe()} at first
+and learn about other functions as you go.
+For example, following snippets perform structuring as it is shown in the left figure:
+
+\begin{lstlisting}
+df.groupby(["factor_1", "factor_2"]).describe()
+df.groupby(["factor_1"]).describe()
+df.groupby(["factor_2"]).describe()
+\end{lstlisting}
+
+\vspace{-22 pt}
+
+And recall our example where we wanted to compute statistics
+of all outcomes for which \lstinline{factor_2 == "A"}.
+This is how you can do it in Pandas:
+
+\begin{lstlisting}
+df[df["factor_2"] == "A"].describe()
+\end{lstlisting}
+
+\vspace{-8 pt}
+
+\textrm{\textbf{Final remarks}}
+\vspace{6 pt}
+
+We have seen that sometimes it is better to be lazy and
+do not commit to a specific structure too soon.
+This allows us to reshape and restructure data to our needs more
+freely and with much less overhead.
+
+\vspace{3 pt}
+
+By using Pandas, we also avoid writing unnecessary boilerplate code.
+Apart from statistical operations shown previously,
+Pandas can import a \lstinline{DataFrame} from the most widely used formats
+(CSV, Excel, JSON, \ldots) as well as export data to them.
+
+\vspace{3 pt}
+
+Last but not least advantage of the proposed approach is that you can make
+beautiful visualisations of your data with minimal effort by using
+the Seaborn package:
+
+\begin{lstlisting}
+import seaborn as sns
+sns.boxplot(
+    x="factor_1",
+    hue="factor_2",
+    y="outcome",
+    data=df,
+)
+\end{lstlisting}
