@@ -66,7 +66,7 @@ or maintain multiple codebases, one for the old structure and one for the new on
 \vspace{3 pt}
 
 Finally, any mathematical operations on such data structures require
-a lot of \emph{ad hoc}, verbose code (once again).
+a lot of brittle, verbose code.
 Suppose we want to compute statistics (mean, standard deviation etc.)
 over all results for \lstinline{factor_2 == "A"}:
 
@@ -83,4 +83,5 @@ print(flattened.mean(), flattened.std())
 
 \vspace{-22 pt}
 
-Just imagine how much you will have to refactor here! Yuck!
+Just imagine how much you will have to refactor here.
+Can we do better?
